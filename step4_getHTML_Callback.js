@@ -1,7 +1,7 @@
 var https = require('https');
 
-let bufferOutput = "";
 function getHTML (options, callback) {
+  let bufferOutput = "";
   
 
   // HTTP Request
@@ -15,10 +15,13 @@ function getHTML (options, callback) {
       bufferOutput += data;
     });
 
-    response.on('end', callback );
+    response.on('end', function () {
+      let returnOutput = callback(bufferOutput);
+      return returnOutput;
+    });
 
   });
-}
+}  
 
 
 //function printHTML (html) {
@@ -30,7 +33,7 @@ var requestOptions_stepFour = {
   path: '/http-examples/step4.html'
 };
 
-let stepFourRequest = getHTML(requestOptions_stepFour, function () {
+let stepFourRequest = getHTML(requestOptions_stepFour, function (bufferOutput) {
   console.log(bufferOutput);
 });
 
