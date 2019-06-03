@@ -18,10 +18,10 @@ function getAndPrintHTML () {
     response.on('data', function (data) {
       //console.log('Chunk Received. Length:', data.length);
       bufferOutput += data;
-      console.log(data);
     });
 
     response.on('end', function() {
+      console.log(bufferOutput);
       console.log('Response stream complete.');
     });
 
